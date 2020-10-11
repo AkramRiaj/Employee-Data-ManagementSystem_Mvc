@@ -16,4 +16,5 @@
      * Run sql script
      * Run project
      * Registration
-     * Login
+     * Login  : Username : admin@gmail.com
+                Password : admin123
