@@ -1,0 +1,183 @@
+﻿
+@{
+    ViewBag.Title = "DataInsert";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>DataInsert</h2>
+
+<script src="~/Scripts/jquery-3.3.1.min.js"></script>
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title> Add Multi-Row Data </title>
+</head>
+<body>
+    <div>
+        <label>Create Sample User JSON Data and send it to controller</label><br /><br />
+
+        InstituteName   : <input type="text" id="InstituteName" /> <br /> <br />
+
+        Address         : <input type="text" id="Address" /><br /> <br />
+
+        City            : <input type="text" id="City" /><br /> <br />
+
+        <input type="button" id="btnUpdateUserDetail" class="btn btn-primary" value="Add" onclick="AddValueToList();" />  
+        
+        |
+
+        <input type="button" id="btnUpdateUserDetailEdit" class="btn btn-success" value="Save" onclick="EditValueToList();" />
+
+        <br />
+        <table id="infoTable" class="table">
+            <thead>
+                <tr>
+                    <th>InstituteID</th>
+                    <th> Institute Name </th>
+                    <th>Address </th>
+                    <th>City </th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+
+        <input type="button" id="btnUpdateInstituteDetail" class="btn btn-warning" value="Submit to Server" onclick="UpdateInstituteDetail();" />
+
+
+    </div>
+</body>
+</html>
+
+<script src="~/Scripts/jquery-3.3.1.js"></script>
+
+<script lang="en" type="text/javascript">
+    var InstituteId = 0;
+    var InstituteList = [];
+    function AddValueToList() {
+
+        var a = document.getElementById("InstituteName").value;
+        var b = document.getElementById("Address").value;
+        var c = document.getElementById("City").value;
+
+
+        if (a == "" || b == "" || c == "") {
+            alert("Input data can not empty");
+            return false;
+        }
+
+
+        InstituteId = 0;
+        var InstituteDetails = {};
+        InstituteDetails["InstituteID"] = InstituteList.length + 1;
+        InstituteDetails["InstituteName"] = document.getElementById("InstituteName").value;
+        InstituteDetails["Address"] = document.getElementById("Address").value;
+        InstituteDetails["City"] = document.getElementById("City").value;
+        InstituteList.push(InstituteDetails);
+        fillTable();
+
+
+    }
+
+    function EditValueToList() {
+
+        for (var i = InstituteList.length; i--;) {
+            if (InstituteList[i].InstituteID === InstituteId) {
+                InstituteList[i].InstituteName = document.getElementById("InstituteName").value;
+                InstituteList[i].Address = document.getElementById("Address").value;
+                InstituteList[i].City = document.getElementById("City").value;
+                break;
+            }
+        }
+
+        fillTable();
+
+    }
+
+    function fillTable() {
+        $('#infoTable > tbody').empty();
+
+        InstituteList.forEach(function (val) {
+            $('#infoTable > tbody:last-child').append('<tr><td>' + val.InstituteID + '</td><td>' + val.InstituteName + '</td><td>' + val.Address + '</td><td>' + val.City + '</td><td> <input type="button" class="btn btn-danger"  value="Delete" onclick="tempDelete(' + val.InstituteID + ')" /> <input type="button" class="btn btn-warning"  value="Edit" onclick="editPre(' + val.InstituteID + ')" /></td></tr>');
+        })
+
+    }
+
+
+
+    function tempDelete(InstituteID) {
+        remove(InstituteList, InstituteID);
+        fillTable();
+    }
+
+    function editPre(InstituteID) {
+        for (var i = InstituteList.length; i--;) {
+            if (InstituteList[i].InstituteID === InstituteID) {
+                InstituteId = InstituteID;
+                document.getElementById("InstituteName").value = InstituteList[i].InstituteName;
+                document.getElementById("Address").value = InstituteList[i].Address;
+                document.getElementById("City").value = InstituteList[i].City;
+                break;
+            }
+        }
+
+
+    }
+
+    function remove(arr, item) {
+        for (var i = arr.length; i--;) {
+            if (arr[i].InstituteID === item) {
+                arr.splice(i, 1);
+            }
+        }
+        for (var i = 0; i < arr.length; i++) {
+            arr[i].InstituteID = i + 1;
+        }
+
+    }
+
+
+    function UpdateInstituteDetail() {
+        var instituteJason = JSON.stringify(InstituteList);
+
+        var getReportColumnsParams = { "instituteJason": instituteJason };
+
+        $.ajax({
+            type: "POST",
+            traditional: true,
+            async: false,
+            cache: false,
+            url: '/Institutes/DataInsert',
+            context: document.body,
+            data: getReportColumnsParams,
+            success: function (result) {
+                alert(result);
+            },
+            error: function (xhr) {
+                console.log(xhr.responseText);
+                alert("Error has occurred..");
+            }
+        });
+
+        InstituteList = [];
+        document.getElementById("InstituteName").value = '';
+        document.getElementById("Address").value = '';
+        document.getElementById("City").value = '';
+        fillTable();
+
+
+
+
+    }
+
+
+
+
+</script>
+
+
+

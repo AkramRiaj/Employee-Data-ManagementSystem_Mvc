@@ -1,0 +1,30 @@
+﻿@model MvcProject.Models.ExternalLoginListViewModel
+@using Microsoft.Owin.Security
+
+<h4>Please log in First</h4>
+<hr />
+@{
+    var loginProviders = Context.GetOwinContext().Authentication.GetExternalAuthenticationTypes();
+    if (loginProviders.Count() == 0) {
+        <div style="text-decoration-color:ActiveCaption">
+            <p>
+                AR Creative Started its journey. It’s based in Dhaka, Bangladesh.
+                AR Creative is specialized with User Interface & User Experience (UI / UX),
+                Application Design for mobile and web, Software Development, Visual Effects,
+                Animation, Computer Graphics, Graphics Design, Branding and other related services
+            </p>
+        </div>
+    }
+    else {
+        using (Html.BeginForm("ExternalLogin", "Account", new { ReturnUrl = Model.ReturnUrl })) {
+            @Html.AntiForgeryToken()
+            <div id="socialLoginList">
+                <p>
+                    @foreach (AuthenticationDescription p in loginProviders) {
+                        <button type="submit" class="btn btn-default" id="@p.AuthenticationType" name="provider" value="@p.AuthenticationType" title="Log in using your @p.Caption account">@p.AuthenticationType</button>
+                    }
+                </p>
+            </div>
+        }
+    }
+}

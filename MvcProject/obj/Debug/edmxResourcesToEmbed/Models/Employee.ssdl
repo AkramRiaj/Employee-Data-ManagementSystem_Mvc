@@ -1,0 +1,146 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="EmployeeInfoModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Certificate">
+    <Key>
+      <PropertyRef Name="CertificateID" />
+    </Key>
+    <Property Name="CertificateID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CertificateName" Type="varchar" MaxLength="30" />
+  </EntityType>
+  <EntityType Name="Department">
+    <Key>
+      <PropertyRef Name="DepartmentID" />
+    </Key>
+    <Property Name="DepartmentID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="DepartmentName" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Employee">
+    <Key>
+      <PropertyRef Name="EmployeeID" />
+    </Key>
+    <Property Name="EmployeeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FirstName" Type="varchar" MaxLength="20" />
+    <Property Name="Lastname" Type="varchar" MaxLength="20" />
+    <Property Name="Address" Type="varchar" MaxLength="50" />
+    <Property Name="Contact" Type="varchar" MaxLength="20" />
+    <Property Name="DepartmentID" Type="int" />
+    <Property Name="JobID" Type="int" />
+    <Property Name="ImageFile" Type="varchar" MaxLength="200" />
+  </EntityType>
+  <EntityType Name="EmploymentHistory">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="EmployeeID" Type="int" />
+    <Property Name="CertificateID" Type="int" />
+    <Property Name="InstituteID" Type="int" />
+    <Property Name="JobStarttDate" Type="date" />
+    <Property Name="JobEndDate" Type="varchar" MaxLength="10" />
+  </EntityType>
+  <EntityType Name="Institute">
+    <Key>
+      <PropertyRef Name="InstituteID" />
+    </Key>
+    <Property Name="InstituteID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="InstituteName" Type="varchar" MaxLength="30" />
+    <Property Name="Address" Type="varchar" MaxLength="50" />
+    <Property Name="City" Type="varchar" MaxLength="20" />
+  </EntityType>
+  <EntityType Name="Job">
+    <Key>
+      <PropertyRef Name="JobID" />
+    </Key>
+    <Property Name="JobID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="JobTitle" Type="varchar" MaxLength="20" />
+    <Property Name="Salary" Type="varchar" MaxLength="20" />
+  </EntityType>
+  <Association Name="FK__Employee__Depart__276EDEB3">
+    <End Role="Department" Type="Self.Department" Multiplicity="0..1" />
+    <End Role="Employee" Type="Self.Employee" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Department">
+        <PropertyRef Name="DepartmentID" />
+      </Principal>
+      <Dependent Role="Employee">
+        <PropertyRef Name="DepartmentID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Employee__JobID__286302EC">
+    <End Role="Job" Type="Self.Job" Multiplicity="0..1" />
+    <End Role="Employee" Type="Self.Employee" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Job">
+        <PropertyRef Name="JobID" />
+      </Principal>
+      <Dependent Role="Employee">
+        <PropertyRef Name="JobID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Employmen__Certi__300424B4">
+    <End Role="Certificate" Type="Self.Certificate" Multiplicity="0..1" />
+    <End Role="EmploymentHistory" Type="Self.EmploymentHistory" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Certificate">
+        <PropertyRef Name="CertificateID" />
+      </Principal>
+      <Dependent Role="EmploymentHistory">
+        <PropertyRef Name="CertificateID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Employmen__Emplo__2F10007B">
+    <End Role="Employee" Type="Self.Employee" Multiplicity="0..1" />
+    <End Role="EmploymentHistory" Type="Self.EmploymentHistory" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Employee">
+        <PropertyRef Name="EmployeeID" />
+      </Principal>
+      <Dependent Role="EmploymentHistory">
+        <PropertyRef Name="EmployeeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Employmen__Insti__30F848ED">
+    <End Role="Institute" Type="Self.Institute" Multiplicity="0..1" />
+    <End Role="EmploymentHistory" Type="Self.EmploymentHistory" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Institute">
+        <PropertyRef Name="InstituteID" />
+      </Principal>
+      <Dependent Role="EmploymentHistory">
+        <PropertyRef Name="InstituteID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="EmployeeInfoModelStoreContainer">
+    <EntitySet Name="Certificate" EntityType="Self.Certificate" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Department" EntityType="Self.Department" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Employee" EntityType="Self.Employee" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="EmploymentHistory" EntityType="Self.EmploymentHistory" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Institute" EntityType="Self.Institute" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Job" EntityType="Self.Job" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__Employee__Depart__276EDEB3" Association="Self.FK__Employee__Depart__276EDEB3">
+      <End Role="Department" EntitySet="Department" />
+      <End Role="Employee" EntitySet="Employee" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Employee__JobID__286302EC" Association="Self.FK__Employee__JobID__286302EC">
+      <End Role="Job" EntitySet="Job" />
+      <End Role="Employee" EntitySet="Employee" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Employmen__Certi__300424B4" Association="Self.FK__Employmen__Certi__300424B4">
+      <End Role="Certificate" EntitySet="Certificate" />
+      <End Role="EmploymentHistory" EntitySet="EmploymentHistory" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Employmen__Emplo__2F10007B" Association="Self.FK__Employmen__Emplo__2F10007B">
+      <End Role="Employee" EntitySet="Employee" />
+      <End Role="EmploymentHistory" EntitySet="EmploymentHistory" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Employmen__Insti__30F848ED" Association="Self.FK__Employmen__Insti__30F848ED">
+      <End Role="Institute" EntitySet="Institute" />
+      <End Role="EmploymentHistory" EntitySet="EmploymentHistory" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

@@ -1,0 +1,52 @@
+﻿@model IEnumerable<MvcProject.Models.Admin_RoleCreation>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "RollCreate")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.RoleName)
+        </th>
+        <th></th>
+    </tr>
+
+    @if (Model != null)
+    {
+        foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.RoleName)
+                </td>
+                <td>
+
+                    @using (Html.BeginForm("Delete", "AdminRole", FormMethod.Post))
+                    {
+
+
+                        <div class="form-actions no-color">
+                            @Html.Hidden("RoleName", item.RoleName)
+                            <input type="submit" value="Delete" class="btn btn-default" />
+
+                        </div>
+                    }
+
+
+                </td>
+                <td>
+                </td>
+            </tr>
+        }
+
+    }
+
+
+
+</table>

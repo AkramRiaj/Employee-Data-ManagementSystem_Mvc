@@ -1,0 +1,59 @@
+﻿@model IEnumerable<MvcProject.Models.EmploymentHistory>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.JobStarttDate)
+        </th>
+        <a href="~/Views/EmploymentHistories/Index.cshtml">~/Views/EmploymentHistories/Index.cshtml</a>
+        <th>
+            @Html.DisplayNameFor(model => model.JobEndDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Certificate.CertificateName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Employee.FirstName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Institute.InstituteName)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.JobStarttDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.JobEndDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Certificate.CertificateName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Employee.FirstName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Institute.InstituteName)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.ID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.ID })
+        </td>
+    </tr>
+}
+
+</table>

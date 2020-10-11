@@ -1,0 +1,59 @@
+﻿@model MvcProject.Models.EmploymentHistory
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>EmploymentHistory</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.JobStarttDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.JobStarttDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.JobEndDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.JobEndDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Certificate.CertificateName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Certificate.CertificateName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Employee.FirstName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Employee.FirstName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Institute.InstituteName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Institute.InstituteName)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

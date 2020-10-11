@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="4e2a316a71c944d2bd152bf6ec355105" Name="Diagram1">
+        <EntityTypeShape EntityType="EmployeeInfoModel.Certificate" Width="1.5" PointX="3" PointY="4.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmployeeInfoModel.Department" Width="1.5" PointX="0.75" PointY="1.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmployeeInfoModel.Employee" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmployeeInfoModel.EmploymentHistory" Width="1.5" PointX="5.25" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmployeeInfoModel.Institute" Width="1.5" PointX="3" PointY="7.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmployeeInfoModel.Job" Width="1.5" PointX="0.75" PointY="5.625" IsExpanded="true" />
+        <AssociationConnector Association="EmployeeInfoModel.FK__Employmen__Certi__300424B4" ManuallyRouted="false" />
+        <AssociationConnector Association="EmployeeInfoModel.FK__Employee__Depart__276EDEB3" ManuallyRouted="false" />
+        <AssociationConnector Association="EmployeeInfoModel.FK__Employee__JobID__286302EC" ManuallyRouted="false" />
+        <AssociationConnector Association="EmployeeInfoModel.FK__Employmen__Emplo__2F10007B" ManuallyRouted="false" />
+        <AssociationConnector Association="EmployeeInfoModel.FK__Employmen__Insti__30F848ED" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

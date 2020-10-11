@@ -1,0 +1,143 @@
+﻿@model MvcProject.Models.Details
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Employee Details</h2>
+
+@if (Model != null)
+{
+    <table class="table  table-hover">
+        <tr>
+            <th>
+                Name
+            </th>
+            <th>
+                CertificateName
+            </th>
+
+            <th>
+                InstituteName
+            </th>
+            <th>
+                JobStarttDate
+            </th>
+
+            <th>
+                JobEndDate
+            </th>
+            <th></th>
+        </tr>
+
+        @if (Model.EmploymentHistories != null)
+        {
+            foreach (var item in Model.EmploymentHistories)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Employee.Lastname)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Certificate.CertificateName)
+                    </td>
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Institute.InstituteName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.JobStarttDate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.JobEndDate)
+                    </td>
+
+                    <td>
+                        @*@Html.ActionLink("Select", "Index", new { EmployeeID = item.EmployeeID }) |*@
+                        @Html.ActionLink("Edit", "Edit", new { id = item.ID }, null) |
+                        @Html.ActionLink("Details", "Details", new { id = item.ID }, null) |
+                        @Html.ActionLink("Delete", "Delete", new { id = item.ID }, null)
+                    </td>
+                </tr>
+            }
+
+        }
+
+
+    </table>
+}
+
+
+@if (Model != null)
+{
+    <table class="table table-hover">
+        <tr>
+            <th>
+                FirstName
+            </th>
+            <th>
+                Lastname
+            </th>
+            <th>
+                Address
+            </th>
+            <th>
+                Contact
+            </th>
+            <th>
+                ImageFile
+            </th>
+            <th>
+                DepartmentName
+            </th>
+            <th>
+                JobTitle
+            </th>
+            <th></th>
+        </tr>
+
+        @if (Model.Employees != null)
+        {
+            foreach (var item in Model.Employees)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.FirstName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Lastname)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Address)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Contact)
+                    </td>
+                    <td>
+                        <img src="@Url.Content(item.ImageFile)" width="100" height="100" />
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Department.DepartmentName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Job.JobTitle)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Select", "Index", new { EmployeeID = item.EmployeeID }) |
+                        @Html.ActionLink("Edit", "Edit", "Employees", new { id = item.EmployeeID }, null) |
+                        @Html.ActionLink("Details", "Details", "Employees", new { id = item.EmployeeID }, null) |
+                        @Html.ActionLink("Delete", "Delete", "Employees", new { id = item.EmployeeID }, null)
+                    </td>
+                </tr>
+            }
+
+        }
+
+
+    </table>
+}
+
+
+
+
+
