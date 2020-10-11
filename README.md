@@ -1,5 +1,5 @@
 
-# Project Name : Library Management System
+# Project Name : Employee Data Management System
 # Project Description :
       * Windows Authentication
       * DataBase First
